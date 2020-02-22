@@ -1,0 +1,190 @@
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+/* configuring global font size */
+html {
+    /* font-size: 10px; or we can do percentage i.e 10/16 = 62.5% */
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: grey;
+    padding: 3rem;
+    box-sizing: border-box;
+}
+/*
+to right => left ->  right,
+to right bottom => left top -> right bottom
+*/
+.header {
+    height: 95vh; /* 95% of viewport height*/
+    background-image: linear-gradient(to right,#a1d45f9c, #28b485), url('./resource/OP.jpg'); /*from left to right gradient color*/
+    background-size: cover;/*use to spread image */
+    background-position: top;
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100% );/* we can use px, vh, % for height*/
+    position: relative;
+}
+
+/* The easier way to center anything using transform, top, left*/
+/* when element position is absolute then the parent position is relative */
+
+.header__logo-box {
+    position: absolute;
+    left: 4rem;
+    top: 4rem;
+}
+
+.header__logo {
+    height: 3.5rem;
+}
+
+.heading-primary {
+    color: white;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+}
+
+.heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    letter-spacing: 3.5rem;
+    font-weight: 400;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    /*
+    animation-timing-function: ease;
+    there are many buildin function in mozilla site
+    */
+
+    /*
+    animation-delay: 3s;
+    starts after 3s of page liaded
+    */
+}
+
+.header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.heading-primary--sub {
+    display: block;
+    font-weight: 400;
+    font-size: 3rem;
+    letter-spacing: 1.5rem;
+    animation: moveInRight;
+    animation-duration: 1s;
+    margin-bottom: 6rem;
+}
+
+/*creating animations using @keyframes & animation property*/
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10rem)
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(10rem)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0)
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10rem)
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(-10rem)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0)
+    }
+}
+
+/*-------------------------------------------------sudo  class for anchor---------------------------------------------------------------*/
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(5rem)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0)
+    }
+}
+
+.btn:link, .btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+}
+
+.btn--white {
+    background-color: #fff;
+    color: #777;
+    font-size: 1.6rem;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.199);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.199);
+}
+
+.btn::after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+    border-radius: 10rem;
+}
+
+.btn-white::after {
+    background-color: white;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn--animated {
+    animation: moveInBottom 1s ease-out .75s;
+    animation-fill-mode: backwards;
+}
